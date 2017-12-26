@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
-<link rel="stylesheet" href="static/css/style.default.css" type="text/css" />
-<script src="static/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/css/style.default.css" type="text/css" />
+<script src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery.cookie.js"></script>
@@ -46,25 +46,29 @@
 
       <form class="stdform stdform2" method="post" action="">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="role_id" value="{{$data[0]->role_id}}">
                   <p>
+
                       <label>角色名称</label>
-                        <span class="field"><input type="text" name="role_name" id="firstname2" class="longinput" /></span>
+                        <span class="field"><input type="text" name="role_name" value="{{$data[0]->role_name}}" id="firstname2" class="longinput" /></span>
                     </p>
 
                       <label>角色描述 <small>记录下你的角色描述</small></label>
-                        <span class="field"><textarea cols="80" rows="5" name="role_description" id="location2" class="longinput"></textarea></span>
+                        <span class="field"><textarea cols="80" rows="5" name="role_description" id="location2" class="longinput">{{$data[0]->role_description}}</textarea></span>
                     </p>
                     <p>
                     <label>状态</label>
                      <span class="field">
-                        <input type="radio" name="status" checked="checked" value="1"/> 启用 &nbsp; &nbsp;
-                       <input type="radio" name="status" value="0" /> 禁用 &nbsp; &nbsp;
+
+                        <input type="radio" name="status" @if($data[0]->status == 1) checked @endif value="1"/> 启用 &nbsp; &nbsp;
+
+                       <input type="radio" @if($data[0]->status == 0) checked @endif name="status" value="0" /> 禁用 &nbsp; &nbsp;
+
                      </span>
                      </p>
 
                     <p class="stdformbutton">
-                      <button type="submit" class="submit radius2">提交角色</button>
-                        <input type="reset" class="reset radius2" value="重置角色" />
+                      <button type="submit" class="submit radius2">修改角色</button>
                     </p>
 
 
@@ -80,22 +84,3 @@
 
 </body>
 </html>
-<script type="text/javascript" language="javascript">
-
-    //   submitHandler: function submit(form) {
-    //       var form = new FormData(form);
-    //       $.ajax({
-    //         url: "{{url('Admin\roleController@role_add')}}",
-    //         type: 'post',
-    //         dataType: 'json',
-    //         data: form,
-    //         processData: false,
-    //         contentType: false,
-    //         success: function(data) {
-    //           alert(111);
-    //         }
-    //       });
-    //
-    // }
-
-</script>

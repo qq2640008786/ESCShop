@@ -4,8 +4,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
-<link rel="stylesheet" href="static/css/style.default.css" type="text/css" />
-<script src="static/js/jquery.min.js"></script>
+<link rel="stylesheet" href="/static/css/style.default.css" type="text/css" />
+<script src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
 <script type="text/javascript" src="/static/js/plugins/jquery.cookie.js"></script>
@@ -34,40 +34,41 @@
 <div class="bodywrapper">
 @include('layouts.master')
     <div class="centercontent">
-      <div class="contenttitle2">
-                    <h3>角色添加</h3>
-                </div><!--contenttitle-->
-        @if(!empty($error) && count($error) > 0)
-        <div class="notibar msgerror">
-              <a class="close"></a>
-              <p>{{ $errors->all()[0]}}</p>
-          </div>
-        @endif
+      <div class="pageheader">
+          <h3></h3>
+      </div><!--contenttitle-->
+      <div class="pageheader">
+          <h1 class="pagetitle">种类添加</h1>
 
-      <form class="stdform stdform2" method="post" action="">
+            @if(!empty($errors) && count($errors) > 0 )
+            <div class="notibar msgerror">
+                  <a class="close"></a>
+                  <p>{{ $errors->all()[0]}}</p>
+              </div>
+            @endif
+      </div>
+      <form class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                  <p>
-                      <label>角色名称</label>
-                        <span class="field"><input type="text" name="role_name" id="firstname2" class="longinput" /></span>
+                  <input type="hidden" name="species_id" value="{{ $species_list[0]->species_id }}">
+                    <p>
+                      <label>种类名称</label>
+                        <span class="field"><input type="text" name="species_name" value="{{ $species_list[0]->species_name }}" id="firstname2" class="longinput" /></span>
                     </p>
 
-                      <label>角色描述 <small>记录下你的角色描述</small></label>
-                        <span class="field"><textarea cols="80" rows="5" name="role_description" id="location2" class="longinput"></textarea></span>
-                    </p>
                     <p>
-                    <label>状态</label>
-                     <span class="field">
-                        <input type="radio" name="status" checked="checked" value="1"/> 启用 &nbsp; &nbsp;
-                       <input type="radio" name="status" value="0" /> 禁用 &nbsp; &nbsp;
-                     </span>
-                     </p>
+                      <label>种类编号</label>
+                        <span class="field"><input type="text" name="species_number" value="{{ $species_list[0]->species_number }}" id="firstname2" class="longinput" /></span>
+                    </p>
+
+                    <p>
+                      <label>种类描述 <small>记录下你的种类描述</small></label>
+                        <span class="field"><textarea cols="80" rows="5" name="species_description" id="location2" class="longinput">{{ $species_list[0]->species_description }}</textarea></span>
+                    </p>
 
                     <p class="stdformbutton">
-                      <button type="submit" class="submit radius2">提交角色</button>
-                        <input type="reset" class="reset radius2" value="重置角色" />
+                      <button class="submit radius2">提交种类</button>
+                        <input type="reset" class="reset radius2" value="重置种类" />
                     </p>
-
-
                 </form>
                 <br />
 
@@ -80,22 +81,3 @@
 
 </body>
 </html>
-<script type="text/javascript" language="javascript">
-
-    //   submitHandler: function submit(form) {
-    //       var form = new FormData(form);
-    //       $.ajax({
-    //         url: "{{url('Admin\roleController@role_add')}}",
-    //         type: 'post',
-    //         dataType: 'json',
-    //         data: form,
-    //         processData: false,
-    //         contentType: false,
-    //         success: function(data) {
-    //           alert(111);
-    //         }
-    //       });
-    //
-    // }
-
-</script>

@@ -45,10 +45,17 @@
         <div id="contentwrapper" class="contentwrapper">
 
         	<div id="updates" class="subcontent">
+            @if (session('status'))
+            <div class="notibar msgsuccess"  >
+                <a class="close"></a>
+                <p>{{ session('status')}}
+                <script>setTimeout(function(){window.location.reload();},2000)</script></p>
+            </div>
+            @endif
                     <div class="notibar announcement">
                         <a class="close"></a>
-                        <h3>Announcement</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <h3>登录信息</h3>
+                        <p>{{session('info')}}</p>
                     </div><!-- notification announcement -->
 
                     <div class="two_third dashboard_left">

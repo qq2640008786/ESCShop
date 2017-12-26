@@ -19,20 +19,20 @@
             <a class="count" href="ajax/notifications.html"><span>9</span></a>
       </div>-->
         <div class="userinfo">
-          <img src="static/images/thumbs/avatar.png" alt="" />
+          <img src="/static/images/thumbs/avatar.png" alt="" />
             <span>{{session('user')['role']}}</span>
         </div><!--userinfo-->
 
         <div class="userinfodrop">
           <div class="avatar">
-              <a href=""><img src="static/images/thumbs/avatarbig.png" alt="" /></a>
+              <a href=""><img src="/static/images/thumbs/avatarbig.png" alt="" /></a>
 
             </div><!--avatar-->
             <div class="userdata">
               <h4>{{session('user')['nickname']}}</h4>
                 <span class="email">{{session('user')['email']}}</span>
                 <ul>
-                  <li><a href="editprofile.html">编辑资料</a></li>
+                  <li><a href="{{url('Admin')}}">个人资料</a></li>
                     <li><a href="accountsettings.html">账号设置</a></li>
                     <li><a href="help.html">帮助</a></li>
                     <li><a href="{{url('/login_out')}}">退出</a></li>

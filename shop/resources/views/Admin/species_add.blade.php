@@ -34,24 +34,42 @@
 <div class="bodywrapper">
 @include('layouts.master')
     <div class="centercontent">
-      <div class="contenttitle2">
-                    <h3>种类添加</h3>
-                </div><!--contenttitle-->
+      <div class="pageheader">
+          <h3></h3>
+      </div><!--contenttitle-->
+      <div class="pageheader">
+          <h1 class="pagetitle">种类添加</h1>
 
+            @if(!empty($errors) && count($errors) > 0 )
+            <div class="notibar msgerror">
+                  <a class="close"></a>
+                  <p>{{ $errors->all()[0]}}</p>
+              </div>
+            @endif
+      </div>
       <form class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                  <p>
+
+                    <p>
                       <label>种类名称</label>
                         <span class="field"><input type="text" name="species_name" id="firstname2" class="longinput" /></span>
                     </p>
 
+                    <p>
+                      <label>种类编号</label>
+                        <span class="field"><input type="text" name="species_number" id="firstname2" class="longinput" /></span>
+                    </p>
+
+                    <p>
                       <label>种类描述 <small>记录下你的种类描述</small></label>
                         <span class="field"><textarea cols="80" rows="5" name="species_description" id="location2" class="longinput"></textarea></span>
                     </p>
 
                     <p class="stdformbutton">
-                      <button class="submit radius2">Submit Button</button>
-                        <input type="reset" class="reset radius2" value="Reset Button" />
+                      <button class="submit radius2">提交种类</button>
+                        <input type="reset" class="reset radius2" value="重置种类" />
+
+
                     </p>
                 </form>
                 <br />
@@ -65,6 +83,3 @@
 
 </body>
 </html>
-<script type="text/javascript" language="javascript">
-
-    </script>

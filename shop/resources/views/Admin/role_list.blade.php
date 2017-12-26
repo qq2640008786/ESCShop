@@ -17,6 +17,9 @@
 <script type="text/javascript" src="static/js/plugins/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="static/js/custom/general.js"></script>
 <script type="text/javascript" src="static/js/custom/forms.js"></script>
+<!-- jq 删除-->
+<script type="text/javascript" src="static/js/custom/role.js"></script>
+<script type="text/javascript" src="static/js/plugins/jquery.dataTables.min.js"></script>
 
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
@@ -40,10 +43,20 @@
                 <font>
 管理角色（management roles)，是指特定的管理行为类型。明茨伯格的10种管理行为可以被进一步组合为三个主要的方面，即人际关系角色、信息传递角色和决策制定角色。</font>
             </ul>
+            @if(session('status'))
+            <div class="notibar msgsuccess">
+                  <a class="close"></a>
+                  <p>{{(session('status'))}}
+                    <script>setTimeout(function(){window.location.reload();},2000)</script></p>
+              </div>
+            @endif
+            <div id="edit" class="edit">
+
+            </div>
         </div><!--pageheader-->
         <div class="tableoptions">
-          	<button class="deletebutton radius3" title="表2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除所选</font></font></button> &nbsp;
-            <button class="deletebutton radius3" title="表2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{{url('/role_add')}}">添加角色</a></font></font></button> &nbsp;
+            <button class="deletebutton radius3" title="table2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除所选</font></font></button> &nbsp;
+            <button  title="table2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{{url('/role_add')}}">添加角色</a></font></font></button> &nbsp;
         </div>
 
         <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
@@ -57,6 +70,7 @@
                 <col class="con0">
             </colgroup>
                 <thead>
+
                   <tr>
                   	<th class="head0"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" class="checkall" style="opacity: 0;"></span></div></span></div></th>
                       <th class="head0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></th>
@@ -66,13 +80,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($data as $role)
                   <tr>
-                  	<td align="center"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" style="opacity: 0;"></span></div></span></div></td>
-                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三叉戟</font></font></td>
-                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">赢95+</font></font></td>
-                      <td class="center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-                      <td class="center"><a href="" class="edit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font></a> &nbsp; <a href="" class="delete"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font></a></td>
+                  	<td align="center"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" value="{{$role->role_id}}" style="opacity: 0;"></span></div></span></div></td>
+                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$role->role_name}}</font></font></td>
+                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$role->role_description}}</font></font></td>
+                      <td class="center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{$role->status}}</font></font></td>
+                      <td class="center"><a href="{{url('role_edit')}}/{{$role->role_id}}" class="edit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font></a> &nbsp; <a href="" class="delete" data-id="{{$role->role_id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font></a></td>
                   </tr>
+                  @endforeach
                 </tbody>
             </table>
         </div><!--contentwrapper-->

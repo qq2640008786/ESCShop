@@ -4,19 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Forms | Amanda Admin Template</title>
-<link rel="stylesheet" href="static/css/style.default.css" type="text/css" />
-<script src="static/js/jquery.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery-1.7.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.cookie.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/jquery.tagsinput.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/charCount.js"></script>
-<script type="text/javascript" src="static/js/plugins/ui.spinner.min.js"></script>
-<script type="text/javascript" src="static/js/plugins/chosen.jquery.min.js"></script>
-<script type="text/javascript" src="static/js/custom/general.js"></script>
-<script type="text/javascript" src="static/js/custom/forms.js"></script>
+<link rel="stylesheet" href="/static/css/style.default.css" type="text/css" />
+<script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/jquery.tagsinput.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/charCount.js"></script>
+<script type="text/javascript" src="/static/js/plugins/ui.spinner.min.js"></script>
+<script type="text/javascript" src="/static/js/plugins/chosen.jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/custom/general.js"></script>
+<script type="text/javascript" src="/static/js/custom/forms.js"></script>
 
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
@@ -47,57 +47,53 @@
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                   <p>
                       <label>商品名称</label>
-                        <span class="field"><input type="text" name="goods_name" id="firstname2" class="longinput" /></span>
+                        <span class="field"><input type="text" name="goods_name" value="{{$data[0]->goods_name}}" id="firstname2" class="longinput" /></span>
                     </p>
 
                     <p>
                         <label>商品单号</label>
-                          <span class="field"><input type="text" name="goods_number" id="firstname2" class="longinput" /></span>
+                          <span class="field"><input type="text" name="goods_number" value="{{$data[0]->goods_number}}" id="firstname2" class="longinput" /></span>
                       </p>
 
 
                     <p>
                       <label>上传图片</label>
-                        <img src="{{url('goods_add')}}" alt="">
                         <span class="field"><input type="file" name="goods_picture" id="goods_picture" class="longinput" /></span>
                     </p>
                     <!-- <img id="logo" src=""> -->
 
                     <p>
                         <label>商品类型</label>
-                          <span class="field"><input type="text" name="goods_type" id="firstname2" class="longinput" /></span>
+                          <span class="field"><input type="text" name="goods_type" value="{{$data[0]->goods_type}}" id="firstname2" class="longinput" /></span>
                     </p>
 
                     <p>
                         <label>商品库存</label>
-                          <span class="field"><input type="text" name="goods_stock" id="firstname2" class="longinput" /></span>
+                          <span class="field"><input type="text" name="goods_stock" value="{{$data[0]->goods_stock}}" id="firstname2" class="longinput" /></span>
                   </p>
 
                   <p>
                       <label>商品价格</label>
-                        <span class="field"><input type="text" name="goods_price" id="firstname2" class="longinput" /></span>
+                        <span class="field"><input type="text" name="goods_price" value="{{$data[0]->goods_price}}" id="firstname2" class="longinput" /></span>
                   </p>
 
 
                     <p>
                       <label>商品描述 <small>记录下你的商品描述</small></label>
-                        <span class="field"><textarea cols="80" rows="5" name="goods_description" id="location2" class="longinput"></textarea></span>
+                        <span class="field"><textarea cols="80" rows="5" name="goods_description" id="location2" class="longinput">{{$data[0]->goods_description}}</textarea></span>
                     </p>
-
 
                     <p>
                       <label>所属种类</label>
                         <span class="field"><select name="species_id" id="selection2">
-                          @foreach($species as $list)
-                            <option value="{{$list->species_id}}">{{$list->species_name}}</option>
+                          @foreach($species as $species)
+                            <option value="{{$species->species_id}}"@if($species->species_id == $data[0]->species_id ) selected @endif>{{$species->species_name}}</option>
                             @endforeach
-                        </select></span>
+                        </select>
+                      </span>
                     </p>
-
-
                     <p class="stdformbutton">
-                      <button class="submit radius2">Submit Button</button>
-                        <input type="reset" class="reset radius2" value="Reset Button" />
+                      <button class="submit radius2">修改商品信息</button>
                     </p>
                 </form>
 

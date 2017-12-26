@@ -35,72 +35,47 @@
 @include('layouts.master')
     <div class="centercontent">
       <div class="contenttitle2">
-                    <h3>商品添加</h3>
+                    <h3>个人信息</h3>
                 </div><!--contenttitle-->
-      @if(!empty($errors) && count($errors) > 0)
-      <div class="notibar msgerror">
-          <a class="close"></a>
-          <p>{{ $errors->all()[0]}}</p>
-      </div>
-      @endif
-      <form class="stdform stdform2" method="post" action="" enctype="multipart/form-data">
+        @if(!empty($errors) && count($errors) > 0)
+        <div class="notibar msgerror">
+              <a class="close"></a>
+              <p>{{ $errors->all()[0]}}</p>
+          </div>
+        @endif
+
+      <form class="stdform stdform2" method="post" action="">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <input type="hidden" name="id" value="{{$data->id}}">
                   <p>
-                      <label>商品名称</label>
-                        <span class="field"><input type="text" name="goods_name" id="firstname2" class="longinput" /></span>
+                      <label>昵称</label>
+                        <span class="field"><input type="text" name="nickname" value="{{$data->nickname}}" id="nickname" class="longinput" /></span>
+                    </p>
+                    <p>
+                      <label>email</label>
+                        <span class="field"><input type="text" name="email" value="{{$data->email}}" id="nickname" class="longinput" /></span>
                     </p>
 
                     <p>
-                        <label>商品单号</label>
-                          <span class="field"><input type="text" name="goods_number" id="firstname2" class="longinput" /></span>
-                      </p>
-
-
-                    <p>
-                      <label>上传图片</label>
-                        <img src="{{url('goods_add')}}" alt="">
-                        <span class="field"><input type="file" name="goods_picture" id="goods_picture" class="longinput" /></span>
-                    </p>
-                    <!-- <img id="logo" src=""> -->
-
-                    <p>
-                        <label>商品类型</label>
-                          <span class="field"><input type="text" name="goods_type" id="firstname2" class="longinput" /></span>
+                      <label>性别</label>
+                          <span class="field"><input type="text" name="sex" disabled value="@if($data->sex == 1)男@elseif($data->sex == 0)女@else保密@endif" id="firstname2" class="longinput" /></span>
                     </p>
 
                     <p>
-                        <label>商品库存</label>
-                          <span class="field"><input type="text" name="goods_stock" id="firstname2" class="longinput" /></span>
-                  </p>
-
-                  <p>
-                      <label>商品价格</label>
-                        <span class="field"><input type="text" name="goods_price" id="firstname2" class="longinput" /></span>
-                  </p>
-
-
-                    <p>
-                      <label>商品描述 <small>记录下你的商品描述</small></label>
-                        <span class="field"><textarea cols="80" rows="5" name="goods_description" id="location2" class="longinput"></textarea></span>
+                      <label>角色</label>
+                          <span class="field"><input type="text" name="role" disabled value="{{$data->role}}" id="firstname2" class="longinput" /></span>
                     </p>
 
 
                     <p>
-                      <label>所属种类</label>
-                        <span class="field"><select name="species_id" id="selection2">
-                          @foreach($species as $list)
-                            <option value="{{$list->species_id}}">{{$list->species_name}}</option>
-                            @endforeach
-                        </select></span>
+                      <label>IP</label>
+                          <span class="field"><input type="text" name="IP" disabled value="{{$ip}}" id="firstname2" class="longinput" /></span>
                     </p>
-
 
                     <p class="stdformbutton">
-                      <button class="submit radius2">Submit Button</button>
-                        <input type="reset" class="reset radius2" value="Reset Button" />
+                      <button type="submit" class="submit radius2">提交个人信息</button>
                     </p>
                 </form>
-
                 <br />
 
         </div>
@@ -112,5 +87,3 @@
 
 </body>
 </html>
-<script type="text/javascript" language="javascript">
-    </script>

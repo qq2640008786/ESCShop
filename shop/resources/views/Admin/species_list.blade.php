@@ -17,7 +17,8 @@
 <script type="text/javascript" src="static/js/plugins/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="static/js/custom/general.js"></script>
 <script type="text/javascript" src="static/js/custom/forms.js"></script>
-
+<script type="text/javascript" src="static/js/custom/tables.js"></script>
+<script type="text/javascript" src="static/js/plugins/jquery.dataTables.min.js"></script>
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/style.ie9.css"/>
 <![endif]-->
@@ -40,10 +41,20 @@
                 <font>
 将事物分门别类，针对不同的分类适用不同的或是类似的管理方法进行管理。分类的目的是便于管理。社会分工也属于分类管理。而具体到个人，其自身的事务分门别类就是一种管理。分类管理有助于我们更好的利用知识，更快的得到信息。</font>
             </ul>
+            @if (session('status'))
+            <div class="notibar msgsuccess"  >
+                <a class="close"></a>
+                <p>{{ session('status')}}
+                <script>setTimeout(function(){window.location.reload();},2000)</script></p>
+            </div>
+            @endif
+            <div id="edit" class="edit">
+
+            </div>
         </div><!--pageheader-->
         <div class="tableoptions">
-          	<button class="deletebutton radius3" title="表2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除所选</font></font></button> &nbsp;
-            <button class="deletebutton radius3" title="表2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{{url('/species_add')}}">添加种类</a></font></font></button> &nbsp;
+          	<button class="deletebutton radius3" title="table2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除所选</font></font></button> &nbsp;
+            <button  title="table2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{{url('/species_add')}}">添加种类</a></font></font></button> &nbsp;
         </div>
 
         <table cellpadding="0" cellspacing="0" border="0" id="table2" class="stdtable stdtablecb">
@@ -57,20 +68,27 @@
                 <col class="con0">
             </colgroup>
                 <thead>
+
                   <tr>
-                  	<th class="head0"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" class="checkall" style="opacity: 0;"></span></div></span></div></th>
+                  	<th class="head0"><div class="checker" id="uniform-undefined" ><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" class="checkall" style="opacity: 0;"></span></div></span></div></th>
                       <th class="head0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">种类名称</font></font></th>
+                        <th class="head1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">种类编号</font></font></th>
                       <th class="head1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">种类描述</font></font></th>
                       <th class="head1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">种类操作</font></font></th>
                   </tr>
+
                 </thead>
                 <tbody>
+                  @foreach ($species_list as $list)
                   <tr>
-                  	<td align="center"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" style="opacity: 0;"></span></div></span></div></td>
-                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">三叉戟</font></font></td>
-                      <td class="center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4</font></font></td>
-                      <td class="center"><a href="" class="edit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font></a> &nbsp; <a href="" class="delete"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font></a></td>
+                  	<td align="center"><div class="checker" id="uniform-undefined"><span><div class="checker" id="uniform-undefined"><span><input type="checkbox" value="{{ $list->species_id }}" style="opacity: 0;"></span></div></span></div></td>
+                      <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $list->species_name }}</font></font></td>
+                      <td class="center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $list->species_number }}</font></font></td>
+                      <td class="center"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $list->species_description }}</font></font></td>
+
+                      <td class="center"><a href="" class="edit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"><a href="{{url('species_edit')}}/{{$list->species_id}}">编辑</a></font></font></a> &nbsp; <a href="" class="delete" data-id="{{$list->species_id}}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font></a></td>
                   </tr>
+                  @endforeach
                 </tbody>
             </table>
         </div><!--contentwrapper-->
@@ -82,3 +100,6 @@
 
 </body>
 </html>
+<script>
+
+</script>

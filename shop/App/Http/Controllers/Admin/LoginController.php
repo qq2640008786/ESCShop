@@ -75,6 +75,13 @@ class LoginController extends Controller
           }else{
               $user_info = (array)$user_info;
               session(['user'=>$user_info]);
+              $ip = GetIpLookup() ? '在'.GetIpLookup()['country'].' '.GetIpLookup()['province'].' '.GetIpLookup()['city'].' 登录了'.$_SERVER['SERVER_NAME'].'网站,IP为'.GetIpLookup()['ip']  : session('user')['nickname'].'在 '.date('Y-m-d H:i:s').'登录了'.$_SERVER['SERVER_NAME'].'网站, 局域网Ip地址为'.Getip();
+              // dd($ip);
+              // if ($_SERVER[]) {
+              //   # code...
+              // }
+              session(['info'=>$ip]);
+              // dd(session('info'));
               return redirect()->action('Admin\IndexController@index');
 
           }
